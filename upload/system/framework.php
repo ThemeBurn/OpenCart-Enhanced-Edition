@@ -100,6 +100,10 @@ if ($config->has('action_pre_action')) {
 // Dispatch
 $controller->dispatch(new Action($config->get('action_router')), new Action($config->get('action_error')));
 
+$event->trigger('response/output/before', $response);
+
 // Output
 $response->setCompression($config->get('config_compression'));
 $response->output();
+
+$event->trigger('response/output/after', $response);
