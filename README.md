@@ -2,7 +2,7 @@
 
 ## Overview
 
-OpenCart Enhanced Edition (OCEE) is a fork  of the [OpenCart](https://github.com/opencart/opencart) project. It aims to keep maximum compatibility by following four main principles:
+OpenCart Enhanced Edition (OCEE) is a fork  of the [OpenCart](https://github.com/opencart/opencart) project. It aims to keep maximum compatibility by adhering to the following principles:
  - All [official OpenCart commits](https://github.com/opencart/opencart/commits/master) are merged 
  - Direct changing of OpenCart core files is allowed for bug fixes only. It should happen in a most compatible (even if verbose) way
  - New features that change core files are implemented with ocmods
