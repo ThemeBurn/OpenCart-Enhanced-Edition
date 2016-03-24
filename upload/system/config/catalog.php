@@ -22,9 +22,9 @@ $_['library_autoload'] = array(
 
 // Actions
 $_['action_pre_action'] = array(
-	'startup/startup',
 	'startup/error',
 	'startup/event',
+	'startup/startup',
 	'startup/maintenance',
 	'startup/seo_url',
 	'startup/session'
