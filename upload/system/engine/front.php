@@ -31,7 +31,18 @@ final class Front {
 	}
 
 	private function execute(Action $action) {
+
+		// Trigger the pre events
+		$result = $this->registry->get('event')->trigger('controller/' . $action->getRoute() . '/before');
+
+		if ($result) {
+			return $result;
+		}
+
 		$result = $action->execute($this->registry);
+
+		// Trigger the post events
+		$result = $this->registry->get('event')->trigger('controller/' . $action->getRoute() . '/after', array(&$result));
 
 		if ($result instanceof Action) {
 			return $result;
