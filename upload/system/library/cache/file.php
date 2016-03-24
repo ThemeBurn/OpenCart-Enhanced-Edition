@@ -6,6 +6,10 @@ class File {
 	public function __construct($expire = 3600) {
 		$this->expire = $expire;
 
+		if (rand(0,100) < 25) {
+			return;
+		}
+
 		$files = glob(DIR_CACHE . 'cache.*');
 
 		if ($files) {
