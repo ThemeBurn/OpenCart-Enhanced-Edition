@@ -1,19 +1,19 @@
 <?php
 class ModelToolImage extends Model {
 	public function resize($filename, $width, $height) {
-		if (!is_file(DIR_IMAGE . $filename)) {
+		if (!is_file(DIR_IMAGE . $filename) || substr(str_replace('\\', '/', realpath(DIR_IMAGE . $filename)), 0, strlen(DIR_IMAGE)) != DIR_IMAGE) {
 			return;
 		}
 
 		$extension = pathinfo($filename, PATHINFO_EXTENSION);
 
 		$old_image = $filename;
-		$new_image = 'cache/' . utf8_substr($filename, 0, utf8_strrpos($filename, '.')) . '-' . $width . 'x' . $height . '.' . $extension;
+		$new_image = 'cache/' . utf8_substr($filename, 0, utf8_strrpos($filename, '.')) . '-' . (int)$width . 'x' . (int)$height . '.' . $extension;
 
 		if (!is_file(DIR_IMAGE . $new_image) || (filectime(DIR_IMAGE . $old_image) > filectime(DIR_IMAGE . $new_image))) {
 			$path = '';
 
-			$directories = explode('/', dirname(str_replace('../', '', $new_image)));
+			$directories = explode('/', dirname($new_image));
 
 			foreach ($directories as $directory) {
 				$path = $path . '/' . $directory;
@@ -33,7 +33,9 @@ class ModelToolImage extends Model {
 				copy(DIR_IMAGE . $old_image, DIR_IMAGE . $new_image);
 			}
 		}
+		
 		$new_image = str_replace(' ', '%20', $new_image);  // fix bug when attach image on email (gmail.com). it is automatic changing space " " to +
+		
 		if ($this->request->server['HTTPS']) {
 			return $this->config->get('config_ssl') . 'image/' . $new_image;
 		} else {

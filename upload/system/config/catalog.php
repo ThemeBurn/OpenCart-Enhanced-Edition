@@ -22,17 +22,18 @@ $_['library_autoload'] = array(
 
 // Actions
 $_['action_pre_action'] = array(
+	'startup/session',
 	'startup/startup',
 	'startup/error',
 	'startup/event',
 	'startup/maintenance',
-	'startup/seo_url',
-	'startup/session'
+	'startup/seo_url'
 );
 
 // Action Events
 $_['action_event'] = array(
 	'view/*/before' => 'event/theme',
+	'view/*/after'  => 'event/translation',
 	//'model/*/before' => 'event/debug/before'
 	//'model/*/after' => 'event/debug/after'
 );
